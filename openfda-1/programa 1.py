@@ -17,7 +17,7 @@ print(r1.status, r1.reason)  #comprobación de la respuesta --> status: 200 y re
 repos_raw = r1.read().decode("utf-8")  #lectura del contenido en json y transformación en cadena
 conn.close()
 
-repos = json.loads(repos_raw)  #pasamos el fichero a un formato más sencillo para obtener los datos requeridos (diccionario, lista)
+repos = json.loads(repos_raw)   #pasamos el fichero a un formato más sencillo para obtener los datos requeridos (diccionario, lista)
 
 info=repos['results'][0]
 print('El medicamento cuyo identificador es '+info['id']+', es de uso recomendado en caso de '+info['purpose'][0]+' y es fabricado por ' +info['openfda']['manufacturer_name'][0]+'.')
