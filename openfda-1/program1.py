@@ -1,22 +1,22 @@
-#la API REST que utilizaremos es: https://api.fda.gov/drug/label.json
-#seguimos el modelo del ejercicio 10 del L7
-#importamos 'http.client' para establecer conexión con FDA y 'json' para obtener la información en formato python
+# La API REST que utilizaremos es: https://api.fda.gov/drug/label.json
+# Seguimos el modelo del ejercicio 10 del L7
+# Importamos 'http.client' para establecer conexion con FDA y 'json' para obtener la informacion en formato python
 
 import http.client
 import json
 
 headers = {'User-Agent': 'http-client'}
 
-conn = http.client.HTTPSConnection("api.fda.gov")  #establecemos conexión con el servidor
-conn.request("GET", "/drug/label.json", None, headers)  #enviamos un mensaje de solicitud usando el verbo GET
+conn = http.client.HTTPSConnection("api.fda.gov")   # Establecemos conexion con el servidor
+conn.request("GET", "/drug/label.json", None, headers)  # Enviamos un mensaje de solicitud usando el verbo GET
 
-r1 = conn.getresponse()  #lectura del mensaje
-print(r1.status, r1.reason)  #comprobación de la respuesta --> status: 200 y reason: OK
+r1 = conn.getresponse()  # lectura del mensaje
+print(r1.status, r1.reason)  # Comprobacion de la respuesta --> status: 200 y reason: OK
 
-repos_raw = r1.read().decode("utf-8")  #lectura del contenido en json y transformación en cadena
+repos_raw = r1.read().decode("utf-8")  # Lectura del contenido en json y transformacion en cadena
 conn.close()
 
-repos = json.loads(repos_raw)  #pasamos el fichero a un formato más sencillo para obtener los datos requeridos (diccionario, lista)
+repos = json.loads(repos_raw)  # Pasamos el fichero a un formato mas sencillo para obtener los datos requeridos (diccionario, lista)
 
 info=repos['results'][0]
-print('El medicamento cuyo identificador es '+info['id']+', es de uso recomendado en caso de '+info['purpose'][0]+' y es fabricado por ' +info['openfda']['manufacturer_name'][0]+'.')
+print('El medicamento cuyo identificador es ' + info['id'] + ', es de uso recomendado en caso de ' + info['purpose'][0] + ' y es fabricado por ' + info['openfda']['manufacturer_name'][0] + '.')
