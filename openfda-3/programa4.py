@@ -44,7 +44,7 @@ class TestHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         for nombre in medicinas:
             message += "<li type='disc'>" + nombre + '</li>'  # En una lista
 
-        self.wfile.write(bytes(message, "utf8"))  # Mensaje enviado al cliente
+        self.wfile.write(bytes(message, "utf-8"))  # Mensaje enviado al cliente
         return
 
 
