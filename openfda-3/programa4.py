@@ -28,47 +28,23 @@ for med in range(10):
         continue
 
 
-# Clase con nuestro manejador. Es una clase derivada de BaseHTTPRequestHandler
-# Esto significa que "hereda" todos los metodos de esta clase. Y los que
-# nosotros consideremos los podemos reemplazar por los nuestros
+# Partimos del servidor2 del L6
 class TestHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
-    # GET. Este metodo se invoca automaticamente cada vez que hay una
-    # peticion GET por HTTP. El recurso que nos solicitan se encuentra
-    # en self.path
     def do_GET(self):
+        self.send_response(200)  # Muestra el status (OK)
 
-        # La primera linea del mensaje de respuesta es el
-        # status. Indicamos que OK
-        self.send_response(200)
-
-        # En las siguientes lineas de la respuesta colocamos las
-        # cabeceras necesarias para que el cliente entienda el
-        # contenido que le enviamos (que sera HTML)
-        self.send_header('Content-type', 'text/html')
+        self.send_header('Content-type', 'text/html')  # Aclaraciones del contenido para el cliente (en HTML)
         self.end_headers()
 
-        # Este es el mensaje que enviamos al cliente: un texto y
-        # el recurso solicitado
-        message = """<html>
+        message = """<html><body>"""
+        message += "<h2>Los nombres de los medicamentos son:</h3>"  # En negrita
 
-        <body>
+        # Iteramos sobre los elementos de la lista de medicinas previamente creada, y se une al documento html
+        for nombre in medicinas:
+            message += "<li type='disc'>" + nombre + '</li>'  # En una lista
 
-        <ol>"""
-
-        message += "<h2>Los nombres de los medicamentos son:</h3>"
-
-        for nombre in medicinas: #Iteramos sobre los elementos de la lista, y los escribimos en forma de lista ordenada (ol) en html
-
-            message += "<li type='disc'>" + nombre + '</li>'
-
-        message += """</ol>
-
-        </body>
-
-        </html>"""
-
-        self.wfile.write(bytes(message,"utf-8"))
+        self.wfile.write(bytes(message, "utf8"))  # Mensaje enviado al cliente
         return
 
 
