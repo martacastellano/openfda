@@ -1,4 +1,4 @@
-# Partimos del programa del primer ejercicio
+# Partimos del codigo de programa1
 import http.client
 import json
 

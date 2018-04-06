@@ -6,7 +6,7 @@ headers = {'User-Agent': 'http-client'}
 
 conn = http.client.HTTPSConnection("api.fda.gov")
 conn.request("GET", "/drug/label.json?limit=10", None, headers)     # Como buscamos informacion de
-                                                                    # 10 medicamentos ponemos limit=10
+                                                                    # 10 medicamentos ponemos limit = 10
 r1 = conn.getresponse()
 print(r1.status, r1.reason)
 
