@@ -16,8 +16,8 @@ print(r1.status, r1.reason)  # Comprobacion de la respuesta --> status: 200 y re
 medicina_raw = r1.read().decode("utf-8")  # Lectura del contenido en json y transformacion en cadena
 conn.close()
 
-medicina = json.loads(medicina_raw)     # Pasamos el fichero a un formato mas sencillo para obtener los datos
-                                        # requeridos (diccionario, lista)
+medicina = json.loads(medicina_raw)     # Pasamos el fichero a un formato mas sencillo para obtener
+                                        # los datos requeridos (diccionario, lista)
 
 info = medicina['results'][0]
 

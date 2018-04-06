@@ -19,9 +19,8 @@ datos = aspirinas['results']
 
 # Iteramos con un bucle for sobre los distintos medicamentos contenedores de aspirina obtenidos tras nuestra busqueda
 for asp in range(len(datos)):
-    # Para evitar el error usamos try-except en caso de que el fabricante del medicamento no aparezca como dato
-    try:
+    if datos[asp]['openfda']:
         print('El medicamento cuyo identificador es: ', datos[asp]['id'], 'es fabricado por: ',
               datos[asp]['openfda']['manufacturer_name'][0], '.')
-    except KeyError:
+    else:
         print('El medicamento cuyo identificador es: ', datos[asp]['id'], 'no tiene un fabricante reconocible.')
