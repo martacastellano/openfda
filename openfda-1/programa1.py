@@ -18,7 +18,6 @@ conn.close()
 
 medicina = json.loads(medicina_raw)     # Pasamos el fichero a un formato mas sencillo para obtener
                                         # los datos requeridos (diccionario, lista)
-
 info = medicina['results'][0]
 
 print('El medicamento cuyo identificador es ' + info['id'] + ', es de uso recomendado en caso de '

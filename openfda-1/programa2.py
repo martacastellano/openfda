@@ -4,13 +4,13 @@ import json
 
 headers = {'User-Agent': 'http-client'}
 
-conn = http.client.HTTPSConnection("api.fda.gov")
+conn = http.client.HTTPSConnection("api.fda.gov")  # Establecemos conexion con el servidor
 conn.request("GET", "/drug/label.json?limit=10", None, headers)     # Como buscamos informacion de
                                                                     # 10 medicamentos ponemos limit=10
-r1 = conn.getresponse()
-print(r1.status, r1.reason)
+r1 = conn.getresponse()  # Obtenemos la informacion requerida
+print(r1.status, r1.reason)  # Comprobamos status y razon (200, OK)
 
-medicina_raw = r1.read().decode("utf-8")
+medicina_raw = r1.read().decode("utf-8")  # Lectura del contenido en json y transformacion en cadena
 conn.close()
 
 medicina = json.loads(medicina_raw)

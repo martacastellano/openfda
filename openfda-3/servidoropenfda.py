@@ -7,19 +7,21 @@ PORT = 1999  # Puerto donde lanzamos el servidor
 
 headers = {'User-Agent': 'http-client'}
 
-conn = http.client.HTTPSConnection("api.fda.gov")
+conn = http.client.HTTPSConnection("api.fda.gov")  # Establecemos conexion con el servidor
 conn.request("GET", "/drug/label.json?&limit=10", None, headers)  # Podemos como limite 10 medicamentos en la busqueda
 
-r1 = conn.getresponse()
-print(r1.status, r1.reason)
+r1 = conn.getresponse()  # Obtenemos la informacion requerida
+print(r1.status, r1.reason)  # Comprobamos status y razon (200, OK)
 
-repos_raw = r1.read().decode("utf-8")
+info_raw = r1.read().decode("utf-8")  # Lectura en json y transformacion en cadena
 conn.close()
 
 medicinas = []  # Se crea una lista para almacenar los nombres genericos de los medicamentos
 
-datos = json.loads(repos_raw)
+datos = json.loads(info_raw)  # Pasamos la informacion a un formato que facilite su lectura en python
 
+# Iteramos sobre cada producto, para comprobar mediante un condicional si tiene nombre generico o no,
+# Para anadirlo a la lista previamente creada
 for med in range(len(datos['results'])):
     if datos['results'][med]['openfda']:
         medicinas.append(datos['results'][med]['openfda']['generic_name'][0])
@@ -48,7 +50,7 @@ class TestHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         for nombre in medicinas:
             message += "<li type='square'>" + nombre + '</li>'  # En una lista
 
-        self.wfile.write(bytes(message, "utf-8"))
+        self.wfile.write(bytes(message, "utf-8"))  # Ecribimos el mensaje HTML
         return
 
 

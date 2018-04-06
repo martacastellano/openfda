@@ -8,10 +8,10 @@ conn = http.client.HTTPSConnection("api.fda.gov")
 conn.request("GET", "/drug/label.json/?search=active_ingredient:acetylsalicylic&limit=100", None, headers)
 # Llevamos a cabo la busqueda a partir del principio activo, poniento un limite de 100 medicamentos
 
-r1 = conn.getresponse()
-print(r1.status, r1.reason)
+r1 = conn.getresponse()  # Obtenemos la informacion requerida
+print(r1.status, r1.reason)  # Comprobamos status y razon (200, OK)
 
-aspirinas_raw = r1.read().decode("utf-8")
+aspirinas_raw = r1.read().decode("utf-8")  # Lectura del contenido en json y transformacion en cadena
 conn.close()
 
 aspirinas = json.loads(aspirinas_raw)
