@@ -29,14 +29,14 @@ for med in range(len(datos['results'])):
         continue
 
     if len(medicinas) == 10:  # Como tenemos que poner un limit>10 por si hay algun producto sin nombre generico,
-        # Asi nos aseguramos de que en la lista aparezcan los 10 medicamentos requeridos
+                              # Asi nos aseguramos de que en la lista aparezcan los 10 medicamentos requeridos
         break
 
 
 # Partimos del server2 del L6
 # Clase con nuestro manejador. Es una clase derivada de BaseHTTPRequestHandler
 # Esto significa que "hereda" todos los metodos de esta clase, usamos herencia
-class TestHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
+class testHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         self.send_response(200)  # Respuesta del status (OK)
@@ -59,7 +59,7 @@ class TestHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
 # El servidor comienza a aqui
 # Establecemos como manejador nuestra propia clase
-Handler = TestHTTPRequestHandler
+Handler = testHTTPRequestHandler
 
 # Configurar el socket del servidor, para esperar conexiones de clientes
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
