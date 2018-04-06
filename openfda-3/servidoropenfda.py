@@ -42,7 +42,7 @@ class TestHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
         # Este es el mensaje que enviamos al cliente
-        message = """<html><body>"""
+        message = """<html><body style='background-color: lightblue'>"""
 
         message += "<h2>Los nombres de los medicamentos obtenidos son:</h3>"  # En negrita
 
