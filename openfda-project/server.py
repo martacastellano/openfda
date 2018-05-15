@@ -372,7 +372,16 @@ class TestHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_header('Content-type', 'text/html')
             self.end_headers()
             self.wfile.write(bytes(vista, "utf8"))
+            
+        elif path=='/secret':    # Codigo 401 y una pagina de advertencia.
+            self.send_error(401)
+            self.send_header('WWW-Authenticate', 'Basic realm="Mi servidor"')
+            self.end_headers()
 
+        elif  path=='/redirect':    # Codigo 302 y redirige a la pagina.
+            self.send_response(302)
+            self.send_header('Location', 'http://localhost:'+str(PORT))
+            self.end_headers()
 
         else:    # Si no se identifica la peticion se devuelve error
             self.send_error(404)
